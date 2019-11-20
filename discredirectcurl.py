@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-import pycurl, json, re, hexchat, certifi
+import json, re, hexchat,requests
 #from io import BytesIO
 
 __module_name__ = "hextodiscurl"
@@ -25,21 +25,7 @@ def forward_cb(word,word_eol,userdata):
             messages += (text + " ")
 
     payload = json.dumps({"username":nick,"content":messages})
-    #buf = BytesIO()
-    c = pycurl.Curl()
-    c.setopt(pycurl.URL, HOOKURL)
-    c.setopt(pycurl.HTTPHEADER, ['Content-type:application/json'])
-    c.setopt(pycurl.POST, 1)
-    c.setopt(pycurl.CAINFO, certifi.where())
-    c.setopt(pycurl.POSTFIELDS, payload)
-    c.setopt(pycurl.VERBOSE, 1)
-    #c.setopt(pycurl.WRITEFUNCTION, buf.write)
-    c.setopt(pycurl.USERAGENT,
-            "Mozilla/5.0 (Windows NT 6.1; Win64; x64;en; rv:5.0) Gecko/20110619 Firefox/5.0")
-    c.perform()
-    c.close()
-    #hexchat.prnt(str(buf.getvalue()))
-    #buf.close()
+	requests.post(URL,headers = ['Content-type:application/json'],data=payload)
     return hexchat.EAT_NONE
 
 hexchat.hook_print("Channel Message", forward_cb)
