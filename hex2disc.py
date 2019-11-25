@@ -5,12 +5,12 @@ import re
 import hexchat
 import requests
 
-__module_name__ = "hextodiscurl"
+__module_name__ = "hex2disc"
 __module_version__ = "1.0"
 __module_description__ = "Redirect HexChat->Discord"
 
 URL = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
-HOOKURL = "put API key here"
+HOOKURL = "put webhook URL here"
 
 
 def forward_cb(word, word_eol, userdata):
